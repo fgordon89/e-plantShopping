@@ -1,11 +1,13 @@
 import React, { useState,useEffect } from 'react';
-import './ProductList.css'
+import './ProductList.css';
 import CartItem from './CartItem';
 import {addItem} from './CartSlice';
+
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+    
 
     const plantsArray = [
         {
@@ -248,13 +250,16 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
-const handleAddTodCart = (product) => {
+const handleAddToCart = (product) => {
     dispatch(addItem(product));
     setAddedToCart((prevState) => ({
         ...prevState,
         [prouduct.name]: true, // Set the product name as kay and value as true to indicate its added to cart
-    }));
+    }));    
   };
+  const calculateTotalQuantity = () => {
+    return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
+     };
     return (
         <div>
              <div className="navbar" style={styleObj}>
@@ -304,7 +309,7 @@ const handleAddTodCart = (product) => {
                 ))}
               </div>
             </div>
-         ))}
+          ))}
         </div>
 ) :  (
     <CartItem onContinueShopping={handleContinueShopping}/>
