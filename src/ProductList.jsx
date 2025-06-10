@@ -250,12 +250,13 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
-const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-    setAddedToCart((prevState) => ({
-        ...prevState,
-        [prouduct.name]: true, // Set the product name as kay and value as true to indicate its added to cart
-    }));    
+  const handleAddToCart = (product) => {
+    dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
+  
+    setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
+      ...prevState, // Spread the previous state to retain existing entries
+      [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
+    }));
   };
   const calculateTotalQuantity = () => {
     return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;

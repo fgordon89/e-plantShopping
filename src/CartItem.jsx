@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
+dispatch(addItem(product));
 dispatch(removeItem(item.name));
 
 const CartItem = ({ onContinueShopping }) => {
@@ -46,6 +47,8 @@ const CartItem = ({ onContinueShopping }) => {
     let cost = parseInt(item.cost.substring(1,item.cost.length));
     return (cost * item.quantity);
   };
+
+  
 
   return (
     <div className="cart-container">
